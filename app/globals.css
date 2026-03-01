@@ -1,26 +1,74 @@
+/* app/globals.css */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --color-navy: #1B2A4A;
+  --color-navy-light: #2D4A7A;
+  --color-navy-dark: #0F1A2E;
+
+  --color-gold: #F5A623;
+  --color-gold-light: #FDC96A;
+  --color-gold-dark: #C97D0A;
+
+  --color-alert: #E63946;
+  --color-alert-light: #FF6B76;
+  --color-alert-dark: #B02030;
+
+  --color-safe: #2DC653;
+  --color-safe-light: #5DE07D;
+  --color-safe-dark: #1A8A37;
+
+  --color-ash: #F4F6F9;
+  --color-ash-dark: #E0E4EA;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    @apply text-gray-800 antialiased;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1 {
+    @apply text-2xl font-bold text-navy;
+  }
+
+  h2 {
+    @apply text-xl font-semibold text-navy;
+  }
+
+  h3 {
+    @apply text-lg font-semibold text-navy;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-ash-dark p-6;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-gold text-white font-semibold px-4 py-2 rounded-lg hover:bg-gold-dark transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply border border-navy text-navy font-semibold px-4 py-2 rounded-lg hover:bg-navy hover:text-white transition-colors duration-200;
+  }
+
+  /* Table shared styles */
+  .table-header {
+    @apply bg-navy text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 text-left;
+  }
+
+  .table-cell {
+    @apply px-4 py-3 text-sm text-gray-700 border-b border-ash-dark;
+  }
+
+  /* Section heading */
+  .section-title {
+    @apply text-sm font-bold uppercase tracking-widest text-gold mb-4;
+  }
 }
