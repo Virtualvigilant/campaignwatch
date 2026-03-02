@@ -69,6 +69,6 @@
 
   /* Section heading */
   .section-title {
-    @apply text-sm font-bold uppercase tracking-widest text-gold mb-4;
+    @apply text-sm font-bold uppercase tracking-widest text-gold mb-4 pl-3 border-l-[3px] border-gold;
   }
 }

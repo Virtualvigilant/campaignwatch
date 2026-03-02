@@ -51,15 +51,15 @@ export default async function DashboardPage() {
       .limit(5),
   ])
 
-  
+
 
   // Stats
   const totalContributions = (contributions || []).reduce((s, c) => s + c.amount_kes, 0)
   const flaggedCount = (contributions || []).filter(c => c.flag_status !== 'clean').length
-                     + (expenditures || []).filter(e => e.flag_status !== 'clean').length
+    + (expenditures || []).filter(e => e.flag_status !== 'clean').length
   const spendingByCategory = groupByCategory(expenditures || [])
-  const trendData          = buildTrend(contributions || [])
-  
+  const trendData = buildTrend(contributions || [])
+
   // Top 10 donors
   const topDonors = [...(contributions || [])]
     .sort((a, b) => b.amount_kes - a.amount_kes)
@@ -73,8 +73,9 @@ export default async function DashboardPage() {
         <p className="section-title">Live Dashboard</p>
         <h1>Kenya 2027 Campaign Finance Monitor</h1>
         <p className="text-gray-500 mt-1 text-sm">
-          Real-time tracking of declared political funding &amp; expenditure ahead of the August 2027 General Election.
-          Data sourced from IEBC official filings.
+          Tracking declared political funding &amp; expenditure ahead of
+          the August 2027 General Election under the Electoral
+          Campaign Finance Act, 2013.
         </p>
       </div>
       <AlertTicker />
@@ -99,7 +100,7 @@ export default async function DashboardPage() {
           sub="Registered with IEBC" />
       </div>
 
-      
+
 
       {/* ── CHARTS ROW ─────────────────────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
