@@ -1,6 +1,7 @@
 // app/page.js — Main Dashboard (Server Component)
 import { supabase, formatKES } from '@/lib/supabase'
 import StatCard from '@/components/StatCard'
+import AlertTicker from '@/components/AlertTicker'
 import SpendingChart from '@/components/SpendingChart'
 import TrendChart from '@/components/TrendChart'
 import { StatusBadge, SeverityBadge } from '@/components/FlagBadge'
@@ -51,6 +52,8 @@ export default async function DashboardPage() {
       .limit(6),
   ])
 
+
+
   // Stats
   const totalContributions = (contributions || []).reduce((s, c) => s + c.amount_kes, 0)
   const flaggedCount = (contributions || []).filter(c => c.flag_status !== 'clean').length
@@ -81,6 +84,7 @@ export default async function DashboardPage() {
           <span className="text-sm">Updated 2m ago</span>
         </p>
       </div>
+      <AlertTicker />
 
       {/* ── STAT CARDS (Horizontal Scroll on Mobile) ───────────────── */}
       <div className="flex overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 hide-scrollbar">
@@ -114,17 +118,17 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Left Column: Charts and Tables (2/3 width) */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6" >
 
           {/* Map Placeholder */}
-          <div className="card h-[40vh] min-h-[300px] flex flex-col justify-center items-center bg-gray-50 border-dashed border-2">
+          <div className="card h-[40vh] min-h-[300px] flex flex-col justify-center items-center bg-gray-50 border-dashed border-2" >
             <span className="text-5xl mb-3">🗺️</span>
             <h3 className="text-text-secondary">Kenya Interactive Map</h3>
             <p className="text-xs text-text-secondary mt-1">County breakdown visualization placeholder</p>
-          </div>
+          </div >
 
           {/* Charts Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6" >
             <div className="card">
               <p className="section-title">Spending by Category</p>
               <h2 className="mb-4">Breakdown</h2>
@@ -135,10 +139,10 @@ export default async function DashboardPage() {
               <h2 className="mb-4">Inflows</h2>
               <TrendChart data={trendData} />
             </div>
-          </div>
+          </div >
 
           {/* Top Donors Table */}
-          <div className="card">
+          <div className="card" >
             <div className="flex justify-between items-end mb-4">
               <div>
                 <p className="section-title">Largest Donations</p>
@@ -169,11 +173,11 @@ export default async function DashboardPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
+          </div >
+        </div >
 
         {/* Right Column: Alert Feed (1/3 width) */}
-        <div className="space-y-4">
+        <div className="space-y-4" >
           <div className="flex justify-between items-end mb-2">
             <div>
               <p className="section-title text-risk-high tracking-widest">Recent Alerts</p>
@@ -215,10 +219,10 @@ export default async function DashboardPage() {
             className="block text-center text-sm font-semibold text-text-secondary hover:text-text-primary btn-outline mt-2 w-full pt-3">
             Browse Full Watch List
           </Link>
-        </div>
+        </div >
 
-      </div>
+      </div >
 
-    </div>
+    </div >
   )
 }

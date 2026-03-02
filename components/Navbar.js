@@ -1,5 +1,7 @@
 'use client'
-// components/Navbar.js
+// components/Navbar.js — UPDATED with all new feature links
+// REPLACE your existing components/Navbar.js with this
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'

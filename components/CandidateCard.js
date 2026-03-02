@@ -40,6 +40,7 @@ export default function CandidateCard({ candidate, totalSpent, flagCount }) {
         <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
           <div className={`h-1.5 rounded-full ${barColor} transition-all`}
             style={{ width: `${pct}%` }} />
+
         </div>
         <p className="text-right text-[10px] text-text-secondary mt-1 font-semibold">{pct}% of limit used</p>
       </div>
