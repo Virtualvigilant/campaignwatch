@@ -73,8 +73,9 @@ export default async function DashboardPage() {
         <p className="section-title">Live Dashboard</p>
         <h1>The Samaritan: Kenya 2027 Monitor</h1>
         <p className="text-gray-500 mt-1 text-sm">
-          Real-time tracking of declared political funding &amp; expenditure ahead of the August 2027 General Election.
-          Data sourced from IEBC official filings.
+          Tracking declared political funding &amp; expenditure ahead of
+          the August 2027 General Election under the Electoral
+          Campaign Finance Act, 2013.
         </p>
       </div>
       <AlertTicker />

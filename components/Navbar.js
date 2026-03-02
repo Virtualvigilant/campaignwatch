@@ -1,10 +1,38 @@
 'use client'
-// components/Navbar.js — UPDATED with all new feature links
-// REPLACE your existing components/Navbar.js with this
-
+// components/Navbar.js — The Samaritan Navbar with SVG shield logo
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+
+// ── Inline SVG Shield Logo ─────────────────────────────────────
+export function ShieldLogo({ size = 36, white = false }) {
+    const navy = white ? '#FFFFFF' : '#1B2A4A'
+    const gold = '#F5A623'
+    const green = '#2DC653'
+    const h = Math.round(size * (40 / 36))
+    return (
+        <svg width={size} height={h} viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Shield body */}
+            <path d="M18 2L4 8v12c0 9.5 6 16 14 18 8-2 14-8.5 14-18V8L18 2z" fill={navy} />
+            {/* Green accent stripe at bottom */}
+            <path d="M18 37c-1.5-.4-3-1.1-4.3-2C15 36.2 16.5 37 18 37.5c1.5-.5 3-1.3 4.3-2.5C21 36 19.5 36.6 18 37z" fill={green} opacity="0.9" />
+            {/* Balance scale — crossbar */}
+            <line x1="11" y1="16" x2="25" y2="16" stroke={gold} strokeWidth="1.8" strokeLinecap="round" />
+            {/* Balance scale — pillar */}
+            <line x1="18" y1="12" x2="18" y2="26" stroke={gold} strokeWidth="1.8" strokeLinecap="round" />
+            {/* Balance scale — base */}
+            <line x1="14" y1="26" x2="22" y2="26" stroke={gold} strokeWidth="1.8" strokeLinecap="round" />
+            {/* Left pan */}
+            <path d="M9 17L11 16 13 17" stroke={gold} strokeWidth="1.4" strokeLinecap="round" fill="none" />
+            <path d="M9 17C9 19.5 10 21 11 21S13 19.5 13 17" stroke={gold} strokeWidth="1.2" fill="none" />
+            {/* Right pan */}
+            <path d="M23 17L25 16 27 17" stroke={gold} strokeWidth="1.4" strokeLinecap="round" fill="none" />
+            <path d="M23 17C23 19.5 24 21 25 21S27 19.5 27 17" stroke={gold} strokeWidth="1.2" fill="none" />
+            {/* Top triangle accent */}
+            <circle cx="18" cy="12" r="1.8" fill={gold} />
+        </svg>
+    )
+}
 
 const links = [
     { href: '/', label: 'Dashboard' },
@@ -26,9 +54,9 @@ export default function Navbar() {
             <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
-
-                        {/* Branding - Compact on mobile */}
+                        {/* Branding - Enhanced with remote's ShieldLogo but compact for mobile */}
                         <Link href="/" className="flex items-center gap-2">
+                            <ShieldLogo size={32} />
                             <span className="text-navy font-black text-lg md:text-xl leading-tight tracking-tight">
                                 THE <span className="text-gold">SAMARITAN</span>
                                 <span className="hidden md:block text-slate-400 text-[10px] font-medium uppercase tracking-[0.1em]">Kenya Finance Monitor</span>
@@ -52,7 +80,7 @@ export default function Navbar() {
                             </Link>
                         </div>
 
-                        {/* Mobile: Version display or static icon instead of hamburger */}
+                        {/* Mobile: Version display */}
                         <div className="md:hidden flex items-center">
                             <span className="text-[10px] bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded-full uppercase tracking-widest">v1.2 Live</span>
                         </div>
@@ -61,7 +89,7 @@ export default function Navbar() {
             </nav>
 
             {/* Mobile Bottom Navigation - High visibility 5-tab system */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-2 py-1 flex justify-around items-end z-50 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-2 py-1 flex justify-around items-end z-50 pb-safe shadow-[0_-4px_12_rgba(0,0,0,0.05)]">
 
                 <Link href="/" className={`flex flex-col items-center py-2 min-w-[64px] transition-colors ${pathname === '/' ? 'text-gold' : 'text-slate-400'}`}>
                     <svg className="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>

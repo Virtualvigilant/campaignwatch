@@ -2,26 +2,26 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import PrototypeBanner from '@/components/PrototypeBanner'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'The Samaritan 🇰🇪',
-  description: 'Transparent political finance monitoring ahead of Kenya 2027 Elections — Transparency International Kenya / KISP',
+  title: 'The Samaritan — Campaign Finance Watch Kenya 🇰🇪',
+  description: 'Transparent political finance monitoring ahead of Kenya 2027 Elections — Transparency International Kenya / KISP Programme',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-ash min-h-screen`}>
+      <body className={`${inter.className} bg-ash min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
+        <PrototypeBanner />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full pb-24 md:pb-8">
           {children}
         </main>
-        <footer className="bg-navy text-white text-center py-4 text-sm mt-16">
-          Campaign Finance Watch Tool &nbsp;·&nbsp; Built for Transparency International Kenya
-          &nbsp;·&nbsp; KISP Programme &nbsp;·&nbsp; FCDO Supported
-        </footer>
+        <Footer />
       </body>
     </html>
   )

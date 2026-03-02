@@ -149,10 +149,10 @@ Do not make up information not present in the data.`,
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto flex flex-col min-h-[calc(100vh-160px)]">
 
-      {/* Header */}
-      <div>
+      {/* Header - Stays at top */}
+      <div className="mb-6">
         <p className="section-title">AI Transparency Assistant</p>
         <h1>Ask About Campaign Finance</h1>
         <p className="text-gray-500 text-sm mt-1">
@@ -161,11 +161,11 @@ Do not make up information not present in the data.`,
         </p>
       </div>
 
-      {/* Chat window */}
-      <div className="card p-0 overflow-hidden flex flex-col" style={{ height: '520px' }}>
+      {/* Chat Window - Flex grow to fill space */}
+      <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm mb-6">
 
-        {/* Messages area */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {/* Messages area - Scrollable */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-4 min-h-[400px]">
 
           {/* Welcome message */}
           {messages.length === 0 && (
@@ -182,7 +182,7 @@ Do not make up information not present in the data.`,
                 {SUGGESTED.map(q => (
                   <button key={q} onClick={() => sendMessage(q)}
                     className="text-xs text-left bg-ash hover:bg-navy/5 border border-ash-dark
-                               hover:border-navy/30 rounded-xl px-3 py-2.5 transition-all text-gray-600 hover:text-navy">
+                                hover:border-navy/30 rounded-xl px-3 py-2.5 transition-all text-gray-600 hover:text-navy">
                     💬 {q}
                   </button>
                 ))}
@@ -229,14 +229,14 @@ Do not make up information not present in the data.`,
           <div ref={bottomRef} />
         </div>
 
-        {/* Input area */}
-        <div className="border-t border-ash-dark p-4">
+        {/* Input area - Sticky at bottom of card */}
+        <div className="border-t border-slate-100 bg-slate-50/50 p-4 sticky bottom-0">
           {/* Show suggestions after first message */}
           {messages.length > 0 && messages.length < 3 && (
             <div className="flex flex-wrap gap-1.5 mb-3">
               {SUGGESTED.slice(0, 3).map(q => (
                 <button key={q} onClick={() => sendMessage(q)}
-                  className="text-xs bg-ash hover:bg-navy/5 border border-ash-dark rounded-full px-2.5 py-1 text-gray-500 hover:text-navy transition-colors">
+                  className="text-xs bg-white hover:bg-navy/5 border border-slate-200 rounded-full px-2.5 py-1 text-gray-500 hover:text-navy transition-colors">
                   {q}
                 </button>
               ))}
@@ -251,9 +251,9 @@ Do not make up information not present in the data.`,
               onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
               placeholder="Ask about any candidate, donation, or spending…"
               disabled={loading || !dbData}
-              className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-sm
+              className="flex-1 border border-slate-200 rounded-xl px-4 py-2.5 text-sm
                          focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy
-                         disabled:opacity-50"
+                         disabled:opacity-50 shadow-inner"
             />
             <button onClick={() => sendMessage()} disabled={!input.trim() || loading || !dbData}
               className="bg-navy text-white px-4 py-2.5 rounded-xl font-semibold text-sm
@@ -267,12 +267,17 @@ Do not make up information not present in the data.`,
         </div>
       </div>
 
-      {/* Disclaimer */}
-      <div className="card bg-ash border-ash-dark text-sm text-gray-500">
-        <strong className="text-navy">ℹ️ About this tool:</strong> The Samaritan AI answers questions using data
-        declared to the IEBC. It can only report what has been officially filed — it cannot verify undeclared
-        activities. For suspected violations, please{' '}
-        <a href="/tip-off" className="text-gold hover:underline">submit a confidential tip</a>.
+      {/* Disclaimer - Simplified and with the requested icon */}
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 text-sm text-slate-500 mb-20">
+        <div className="w-5 h-5 rounded-full border-2 border-slate-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+          <span className="text-slate-500 font-bold text-[10px]">!</span>
+        </div>
+        <div className="leading-relaxed">
+          <strong className="text-navy">About this tool:</strong> The Samaritan AI answers questions using data
+          declared to the IEBC. It can only report what has been officially filed — it cannot verify undeclared
+          activities. For suspected violations, please{' '}
+          <a href="/tip-off" className="text-gold font-bold hover:underline">submit a confidential tip</a>.
+        </div>
       </div>
     </div>
   )
