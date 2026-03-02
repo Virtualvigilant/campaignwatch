@@ -1,6 +1,7 @@
 // app/page.js — Main Dashboard (Server Component)
 import { supabase, formatKES } from '@/lib/supabase'
 import StatCard from '@/components/StatCard'
+import AlertTicker from '@/components/AlertTicker'
 import SpendingChart from '@/components/SpendingChart'
 import TrendChart from '@/components/TrendChart'
 import { StatusBadge, SeverityBadge } from '@/components/FlagBadge'
@@ -50,13 +51,15 @@ export default async function DashboardPage() {
       .limit(5),
   ])
 
+  
+
   // Stats
   const totalContributions = (contributions || []).reduce((s, c) => s + c.amount_kes, 0)
   const flaggedCount = (contributions || []).filter(c => c.flag_status !== 'clean').length
                      + (expenditures || []).filter(e => e.flag_status !== 'clean').length
   const spendingByCategory = groupByCategory(expenditures || [])
   const trendData          = buildTrend(contributions || [])
-
+  
   // Top 10 donors
   const topDonors = [...(contributions || [])]
     .sort((a, b) => b.amount_kes - a.amount_kes)
@@ -74,6 +77,7 @@ export default async function DashboardPage() {
           Data sourced from IEBC official filings.
         </p>
       </div>
+      <AlertTicker />
 
       {/* ── STAT CARDS ─────────────────────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -94,6 +98,8 @@ export default async function DashboardPage() {
           label="Parties Monitored"
           sub="Registered with IEBC" />
       </div>
+
+      
 
       {/* ── CHARTS ROW ─────────────────────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
