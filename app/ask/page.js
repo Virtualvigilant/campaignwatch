@@ -149,39 +149,37 @@ Do not make up information not present in the data.`,
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col min-h-[calc(100vh-160px)]">
+    <div className="max-w-3xl mx-auto flex flex-col min-h-[calc(100vh-160px)] md:pb-10">
 
-      {/* Header - Stays at top */}
-      <div className="mb-6">
-        <p className="section-title">AI Transparency Assistant</p>
-        <h1>Ask About Campaign Finance</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Ask anything about the 2027 Kenya election campaign finances in plain English.
+      {/* Header - Simplified for mobile */}
+      <div className="mb-4 md:mb-6 px-4 md:px-0">
+        <p className="section-title text-[10px] md:text-sm">AI Transparency Assistant</p>
+        <h1 className="text-xl md:text-3xl">Ask About Campaign Finance</h1>
+        <p className="text-gray-500 text-[11px] md:text-sm mt-1">
           Powered by Claude AI and live The Samaritan data.
         </p>
       </div>
 
-      {/* Chat Window - Flex grow to fill space */}
-      <div className="flex-1 flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm mb-6">
+      {/* Chat Window Container */}
+      <div className="flex-1 flex flex-col md:bg-white md:border md:border-slate-200 md:rounded-2xl overflow-hidden md:shadow-sm">
 
-        {/* Messages area - Scrollable */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4 min-h-[400px]">
+        {/* Messages area - Responsive height */}
+        <div className="flex-1 overflow-y-auto p-4 md:p-5 space-y-4 pb-40 md:pb-10 min-h-[300px]">
 
           {/* Welcome message */}
           {messages.length === 0 && (
-            <div className="text-center py-6">
-              <div className="text-5xl mb-3">🤖</div>
-              <h3 className="text-navy mb-1">The Samaritan AI</h3>
-              <p className="text-gray-400 text-sm mb-6">
-                Ask me anything about Kenya 2027 campaign finances.<br />
-                I have access to all candidates, donations, spending, and flags.
+            <div className="text-center py-6 md:py-10">
+              <div className="text-4xl md:text-5xl mb-3">🤖</div>
+              <h3 className="text-navy mb-1 text-lg">The Samaritan AI</h3>
+              <p className="text-gray-400 text-xs md:text-sm mb-6 px-6">
+                Ask me about Kenya 2027 campaign finances.
               </p>
 
               {/* Suggested questions */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left max-w-xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left max-w-xl mx-auto px-4">
                 {SUGGESTED.map(q => (
                   <button key={q} onClick={() => sendMessage(q)}
-                    className="text-xs text-left bg-ash hover:bg-navy/5 border border-ash-dark
+                    className="text-[11px] md:text-xs text-left bg-ash hover:bg-navy/5 border border-ash-dark
                                 hover:border-navy/30 rounded-xl px-3 py-2.5 transition-all text-gray-600 hover:text-navy">
                     💬 {q}
                   </button>
@@ -194,11 +192,11 @@ Do not make up information not present in the data.`,
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               {msg.role === 'assistant' && (
-                <div className="w-7 h-7 bg-navy rounded-full flex items-center justify-center text-sm mr-2 flex-shrink-0 mt-0.5">
+                <div className="w-6 h-6 md:w-7 md:h-7 bg-navy rounded-full flex items-center justify-center text-xs md:text-sm mr-2 flex-shrink-0 mt-0.5">
                   🤖
                 </div>
               )}
-              <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed
+              <div className={`max-w-[85%] md:max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed
                 ${msg.role === 'user'
                   ? 'bg-navy text-white rounded-tr-sm'
                   : msg.error
@@ -209,10 +207,10 @@ Do not make up information not present in the data.`,
             </div>
           ))}
 
-          {/* Loading */}
+          {/* Loading icon */}
           {loading && (
             <div className="flex justify-start">
-              <div className="w-7 h-7 bg-navy rounded-full flex items-center justify-center text-sm mr-2 flex-shrink-0">
+              <div className="w-6 h-6 md:w-7 md:h-7 bg-navy rounded-full flex items-center justify-center text-xs md:text-sm mr-2 flex-shrink-0">
                 🤖
               </div>
               <div className="bg-ash rounded-2xl rounded-tl-sm px-4 py-3">
@@ -229,54 +227,55 @@ Do not make up information not present in the data.`,
           <div ref={bottomRef} />
         </div>
 
-        {/* Input area - Sticky at bottom of card */}
-        <div className="border-t border-slate-100 bg-slate-50/50 p-4 sticky bottom-0">
-          {/* Show suggestions after first message */}
-          {messages.length > 0 && messages.length < 3 && (
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              {SUGGESTED.slice(0, 3).map(q => (
-                <button key={q} onClick={() => sendMessage(q)}
-                  className="text-xs bg-white hover:bg-navy/5 border border-slate-200 rounded-full px-2.5 py-1 text-gray-500 hover:text-navy transition-colors">
-                  {q}
-                </button>
-              ))}
+        {/* Input area - FIXED on mobile, STICKY on desktop */}
+        <div className="fixed md:sticky bottom-[72px] md:bottom-0 left-0 right-0 md:relative bg-white md:bg-slate-50/50 border-t border-slate-100 p-3 md:p-4 z-40">
+          <div className="max-w-3xl mx-auto">
+            {/* Show suggestions after first message */}
+            {messages.length > 0 && messages.length < 3 && (
+              <div className="flex overflow-x-auto gap-1.5 mb-2 no-scrollbar pb-1">
+                {SUGGESTED.slice(0, 4).map(q => (
+                  <button key={q} onClick={() => sendMessage(q)}
+                    className="whitespace-nowrap text-[10px] md:text-xs bg-white hover:bg-navy/5 border border-slate-200 rounded-full px-2.5 py-1 text-gray-500 hover:text-navy transition-colors shrink-0">
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+            <div className="flex gap-2">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
+                placeholder="Ask about finances…"
+                disabled={loading || !dbData}
+                className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm
+                           focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy
+                           disabled:opacity-50 shadow-inner md:shadow-none bg-slate-50 md:bg-white"
+              />
+              <button onClick={() => sendMessage()} disabled={!input.trim() || loading || !dbData}
+                className="bg-navy text-white px-5 rounded-xl font-semibold text-sm
+                           hover:bg-navy-light transition-colors disabled:opacity-40">
+                {loading ? '⏳' : '→'}
+              </button>
             </div>
-          )}
-          <div className="flex gap-2">
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
-              placeholder="Ask about any candidate, donation, or spending…"
-              disabled={loading || !dbData}
-              className="flex-1 border border-slate-200 rounded-xl px-4 py-2.5 text-sm
-                         focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy
-                         disabled:opacity-50 shadow-inner"
-            />
-            <button onClick={() => sendMessage()} disabled={!input.trim() || loading || !dbData}
-              className="bg-navy text-white px-4 py-2.5 rounded-xl font-semibold text-sm
-                         hover:bg-navy-light transition-colors disabled:opacity-40">
-              {loading ? '⏳' : '→'}
-            </button>
+            <p className="text-[10px] text-gray-400 mt-2 text-center md:text-left">
+              {!dbData ? '⏳ Loading database…' : '🔒 Verified IEBC Data · Powered by Claude AI'}
+            </p>
           </div>
-          <p className="text-xs text-gray-400 mt-2">
-            {!dbData ? '⏳ Loading database…' : '🔒 Powered by Claude AI · Data from verified IEBC filings'}
-          </p>
         </div>
       </div>
 
-      {/* Disclaimer - Simplified and with the requested icon */}
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-3 text-sm text-slate-500 mb-20">
+      {/* Disclaimer - Hidden on mobile viewport to save space */}
+      <div className="hidden md:flex bg-slate-50 border border-slate-200 rounded-xl p-4 gap-3 text-sm text-slate-500 mt-6">
         <div className="w-5 h-5 rounded-full border-2 border-slate-400 flex items-center justify-center flex-shrink-0 mt-0.5">
           <span className="text-slate-500 font-bold text-[10px]">!</span>
         </div>
         <div className="leading-relaxed">
           <strong className="text-navy">About this tool:</strong> The Samaritan AI answers questions using data
-          declared to the IEBC. It can only report what has been officially filed — it cannot verify undeclared
-          activities. For suspected violations, please{' '}
-          <a href="/tip-off" className="text-gold font-bold hover:underline">submit a confidential tip</a>.
+          declared to the IEBC. It can only report what has been officially filed.
+          For violations, <a href="/tip-off" className="text-gold font-bold hover:underline">submit a tip</a>.
         </div>
       </div>
     </div>
