@@ -8,11 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy:  { DEFAULT: '#1B2A4A', light: '#2D4A7A', dark: '#0F1A2E' },
-        gold:  { DEFAULT: '#F5A623', light: '#FDC96A', dark: '#C97D0A' },
-        alert: { DEFAULT: '#E63946', light: '#FF6B76', dark: '#B02030' },
-        safe:  { DEFAULT: '#2DC653', light: '#5DE07D', dark: '#1A8A37' },
-        ash:   { DEFAULT: '#F4F6F9', dark: '#E0E4EA' },
+        'bg-primary': '#FAFBFC',
+        'bg-elevated': '#FFFFFF',
+        'risk-low': '#10B981',
+        'risk-medium': '#F59E0B',
+        'risk-high': '#EF4444',
+        'text-primary': '#111827',
+        'text-secondary': '#6B7280',
+        'accent-kenya': '#006600',
+        'border-subtle': '#E5E7EB',
+
+        // Legacy fallbacks where absolute needed
+        navy: { DEFAULT: '#111827', light: '#374151', dark: '#000000' },
+        gold: { DEFAULT: '#006600', light: '#008000', dark: '#004d00' },
+        alert: { DEFAULT: '#EF4444', light: '#F87171', dark: '#DC2626' },
+        safe: { DEFAULT: '#10B981', light: '#34D399', dark: '#059669' },
+        ash: { DEFAULT: '#FAFBFC', dark: '#E5E7EB' },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

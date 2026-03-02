@@ -13,8 +13,8 @@ function fmt(v) {
 
 export default function TrendChart({ data }) {
   return (
-    <div className="w-full h-64">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full">
+      <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data} margin={{ left: 8, right: 16, top: 8, bottom: 4 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" tick={{ fontSize: 11 }} />

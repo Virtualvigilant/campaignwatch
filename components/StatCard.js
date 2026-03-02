@@ -1,19 +1,13 @@
 // components/StatCard.js
-export default function StatCard({ icon, value, label, sub, color = 'navy' }) {
-  const border = {
-    navy:  'border-l-navy',
-    gold:  'border-l-gold',
-    alert: 'border-l-alert',
-    safe:  'border-l-safe',
-  }[color] || 'border-l-navy'
-
+export default function StatCard({ icon, value, label, sub, color }) {
+  // Ignored color prop in new uniform design
   return (
-    <div className={`card border-l-4 ${border} flex items-start gap-4`}>
-      <span className="text-3xl">{icon}</span>
+    <div className={`card flex items-start gap-4 card-hoverable`}>
+      <span className="text-3xl shrink-0">{icon}</span>
       <div>
-        <p className="text-2xl font-bold text-navy leading-tight">{value}</p>
-        <p className="font-semibold text-gray-700 text-sm mt-0.5">{label}</p>
-        {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
+        <p className="text-[28px] font-bold text-text-primary leading-none tracking-tight">{value}</p>
+        <p className="font-semibold text-text-secondary text-sm mt-1">{label}</p>
+        {sub && <p className="text-xs text-text-secondary opacity-80 mt-0.5">{sub}</p>}
       </div>
     </div>
   )

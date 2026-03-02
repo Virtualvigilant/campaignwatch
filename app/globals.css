@@ -4,71 +4,122 @@
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --color-navy: #1B2A4A;
-  --color-navy-light: #2D4A7A;
-  --color-navy-dark: #0F1A2E;
+  /* New Spec Colors */
+  --color-bg-primary: #FAFBFC;
+  --color-bg-elevated: #FFFFFF;
 
-  --color-gold: #F5A623;
-  --color-gold-light: #FDC96A;
-  --color-gold-dark: #C97D0A;
+  --color-risk-low: #10B981;
+  --color-risk-medium: #F59E0B;
+  --color-risk-high: #EF4444;
 
-  --color-alert: #E63946;
-  --color-alert-light: #FF6B76;
-  --color-alert-dark: #B02030;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
 
-  --color-safe: #2DC653;
-  --color-safe-light: #5DE07D;
-  --color-safe-dark: #1A8A37;
+  --color-accent-kenya: #006600;
+  --color-border-subtle: #E5E7EB;
 
-  --color-ash: #F4F6F9;
-  --color-ash-dark: #E0E4EA;
+  /* Legacy Colors for backward compatibility where necessary during transition */
+  --color-navy: #111827;
+  --color-navy-light: #374151;
+  --color-navy-dark: #000000;
+
+  --color-gold: #006600;
+  /* Remapped gold to Kenya green accent for legacy btn-primary */
+  --color-gold-light: #008000;
+  --color-gold-dark: #004d00;
+
+  --color-alert: #EF4444;
+  --color-alert-light: #F87171;
+  --color-alert-dark: #DC2626;
+
+  --color-safe: #10B981;
+  --color-safe-light: #34D399;
+  --color-safe-dark: #059669;
+
+  --color-ash: #FAFBFC;
+  --color-ash-dark: #E5E7EB;
 }
 
 @layer base {
   body {
-    @apply text-gray-800 antialiased;
+    @apply bg-bg-primary text-text-primary antialiased;
   }
 
   h1 {
-    @apply text-2xl font-bold text-navy;
+    @apply text-[32px] md:text-[40px] font-bold text-text-primary leading-tight;
   }
 
   h2 {
-    @apply text-xl font-semibold text-navy;
+    @apply text-[20px] font-bold text-text-primary leading-tight;
   }
 
   h3 {
-    @apply text-lg font-semibold text-navy;
+    @apply text-lg font-bold text-text-primary;
   }
 }
 
 @layer components {
 
-  /* Cards */
+  /* Floating Card Effect */
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-ash-dark p-6;
+    @apply bg-bg-elevated rounded-2xl border border-border-subtle p-4 sm:p-6 transition-all duration-200;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Hover lift - simplified, not over-animated */
+  .card-hoverable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
   /* Buttons */
   .btn-primary {
-    @apply bg-gold text-white font-semibold px-4 py-2 rounded-lg hover:bg-gold-dark transition-colors duration-200;
+    @apply bg-accent-kenya text-white font-semibold px-4 py-2 rounded-lg hover:brightness-110 active:scale-95 transition-all duration-200;
   }
 
   .btn-outline {
-    @apply border border-navy text-navy font-semibold px-4 py-2 rounded-lg hover:bg-navy hover:text-white transition-colors duration-200;
+    @apply border border-border-subtle text-text-primary font-semibold px-4 py-2 rounded-lg hover:border-gray-400 active:scale-[0.98] transition-all duration-200 bg-white;
   }
 
   /* Table shared styles */
   .table-header {
-    @apply bg-navy text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 text-left;
+    @apply bg-gray-50 text-text-secondary text-xs font-semibold uppercase tracking-wider px-4 py-3 text-left border-b border-border-subtle;
   }
 
   .table-cell {
-    @apply px-4 py-3 text-sm text-gray-700 border-b border-ash-dark;
+    @apply px-4 py-3 text-sm text-text-primary border-b border-border-subtle;
   }
 
   /* Section heading */
   .section-title {
-    @apply text-sm font-bold uppercase tracking-widest text-gold mb-4;
+    @apply text-xs font-bold uppercase tracking-widest text-text-secondary mb-2;
+  }
+
+  /* Mobile Architecture Specifics */
+  .bottom-nav {
+    height: calc(64px + env(safe-area-inset-bottom, 20px));
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+
+  /* Horizontal scroll snap */
+  .stats-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stat-card {
+    scroll-snap-align: start;
+    flex: 0 0 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
