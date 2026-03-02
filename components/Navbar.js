@@ -123,32 +123,106 @@ export default function Navbar() {
                 </button>
             </div>
 
-            {/* Mobile Menu Overlay - Clean & Spaced */}
+            {/* Mobile Menu Overlay - Comprehensive & Organized */}
             {open && (
-                <div className="md:hidden fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6 pb-24 shadow-2xl animate-in slide-in-from-bottom-full duration-300">
-                        <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-navy font-black text-xl">Quick Actions</h2>
-                            <button onClick={() => setOpen(false)} className="bg-slate-100 p-2 rounded-full text-slate-400 hover:text-navy">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                <div className="md:hidden fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-200">
+                    <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-[2.5rem] shadow-2xl animate-in slide-in-from-bottom-full duration-300 max-h-[90vh] flex flex-col">
+
+                        {/* Sticky Header */}
+                        <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-shrink-0">
+                            <div>
+                                <h2 className="text-navy font-black text-xl">Platform Directory</h2>
+                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">The Samaritan Kenya 2027</p>
+                            </div>
+                            <button onClick={() => setOpen(false)} className="bg-slate-100 p-2.5 rounded-full text-slate-400 hover:text-navy transition-colors">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            {[
-                                { href: '/watch-list', label: 'Watch List', sub: 'Flagged Activity', icon: '🚩', highlight: true },
-                                { href: '/compare', label: 'Candidate Comparison', sub: 'Against limits', icon: '⚖️' },
-                                { href: '/community-reports', label: 'Community Signals', sub: 'Public feed', icon: '📢' },
-                                { href: '/reports', label: 'Download Data', sub: 'CSV Exports', icon: '📑' },
-                            ].map(item => (
-                                <Link key={item.href} href={item.href} onClick={() => setOpen(false)}
-                                    className={`flex flex-col p-4 rounded-2xl border transition-all active:scale-95
-                                    ${item.highlight ? 'bg-gold border-gold text-white shadow-lg' : 'bg-slate-50 border-slate-100 text-navy hover:border-gold/30'}`}>
-                                    <span className="text-xl mb-2">{item.icon}</span>
-                                    <span className="font-bold text-sm leading-tight">{item.label}</span>
-                                    <span className={`text-[10px] mt-1 ${item.highlight ? 'text-white/80' : 'text-slate-400'}`}>{item.sub}</span>
-                                </Link>
-                            ))}
+                        {/* Scrollable Content */}
+                        <div className="overflow-y-auto p-6 space-y-8 pb-32">
+
+                            {/* Section 1: Quick Actions */}
+                            <section>
+                                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gold mb-4">Quick Actions</h3>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {[
+                                        { href: '/watch-list', label: 'Watch List', sub: 'Flags', icon: '🚩', bg: 'bg-alert/5 border-alert/20 text-alert-dark' },
+                                        { href: '/compare', label: 'Comparison', sub: 'Limits', icon: '⚖️', bg: 'bg-navy/5 border-navy/10 text-navy' },
+                                        { href: '/community-reports', label: 'Signals', sub: 'Public', icon: '📢', bg: 'bg-navy/5 border-navy/10 text-navy' },
+                                        { href: '/reports', label: 'Data Hub', sub: 'Exports', icon: '📑', bg: 'bg-navy/5 border-navy/10 text-navy' },
+                                    ].map(item => (
+                                        <Link key={item.href} href={item.href} onClick={() => setOpen(false)}
+                                            className={`flex flex-col p-4 rounded-2xl border transition-all active:scale-95 ${item.bg}`}>
+                                            <span className="text-xl mb-1">{item.icon}</span>
+                                            <span className="font-bold text-xs">{item.label}</span>
+                                            <span className="text-[9px] opacity-60 font-medium uppercase tracking-tighter">{item.sub}</span>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Section 2: Data & Legal */}
+                            <section>
+                                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gold mb-4">Data & Legal</h3>
+                                <div className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden">
+                                    {[
+                                        { label: 'Methodology & Sources', href: '/reports' },
+                                        { label: 'IEBC Official Portal', href: 'https://www.iebc.or.ke', ext: true },
+                                        { label: 'Kenya Law', href: 'https://kenyalaw.org', ext: true },
+                                        { label: 'Legal Framework (ECF Act 2013)', href: '/reports' },
+                                        { label: 'Privacy Policy', href: '/reports' },
+                                        { label: 'Terms of Use', href: '/reports' },
+                                    ].map((l, i) => (
+                                        <Link key={i} href={l.href} target={l.ext ? "_blank" : "_self"}
+                                            className="flex items-center justify-between p-4 text-sm font-medium text-navy border-b border-slate-100 last:border-0 active:bg-slate-100">
+                                            {l.label}
+                                            <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Section 3: Partners */}
+                            <section>
+                                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gold mb-4">Partners</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {['TI Kenya', 'KISP Programme', 'ELGIA', 'URAI Trust', 'CMD Kenya'].map(p => (
+                                        <span key={p} className="bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[11px] font-bold text-slate-600 shadow-sm">
+                                            {p}
+                                        </span>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* Section 4: Contact */}
+                            <section>
+                                <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-gold mb-4">Support & Contact</h3>
+                                <div className="space-y-3">
+                                    <a href="mailto:report@campaignwatch.or.ke" className="flex items-center gap-3 p-4 bg-navy text-white rounded-2xl shadow-lg active:scale-[0.98] transition-transform">
+                                        <div className="bg-white/10 p-2 rounded-xl">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                        </div>
+                                        <div>
+                                            <p className="text-[9px] font-bold uppercase opacity-60">Email Support</p>
+                                            <p className="font-bold text-sm">report@campaignwatch.or.ke</p>
+                                        </div>
+                                    </a>
+                                    <a href="tel:+254203750329" className="flex items-center gap-3 p-4 bg-slate-50 border border-slate-100 text-navy rounded-2xl active:bg-slate-100 transition-colors">
+                                        <div className="bg-navy/5 p-2 rounded-xl">
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                        </div>
+                                        <div>
+                                            <p className="text-[9px] font-bold uppercase text-slate-400">Call Office</p>
+                                            <p className="font-bold text-sm">+254 20 375 0329</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </section>
+
+                            <p className="text-center text-[10px] text-slate-400 font-medium">
+                                Independent platform tracking platform political campaign finance integrity.
+                            </p>
                         </div>
                     </div>
                 </div>
