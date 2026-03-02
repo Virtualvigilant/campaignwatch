@@ -320,7 +320,7 @@ export default function TipOffPage() {
                   className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm
                              focus:outline-none focus:ring-2 focus:ring-navy/20 focus:border-navy" />
                 <p className="text-xs text-gray-400 mt-1">
-                  Your contact details are stored securely and only seen by TI Kenya investigators.
+                 Your submission has been securely received by the Campaign Finance Watch Platform.
                 </p>
               </div>
             )}

@@ -48,41 +48,41 @@ function buildContext(data) {
   }
 
   const candSummary = (candidates || []).map(c => ({
-    name:           c.full_name,
-    party:          c.political_parties?.abbreviation,
-    election_type:  c.election_type,
-    county:         c.county,
+    name: c.full_name,
+    party: c.political_parties?.abbreviation,
+    election_type: c.election_type,
+    county: c.county,
     spending_limit: c.declared_spending_limit,
-    total_raised:   raised[c.id] || 0,
-    total_spent:    spent[c.id] || 0,
-    pct_of_limit:   Math.round(((spent[c.id] || 0) / c.declared_spending_limit) * 100),
+    total_raised: raised[c.id] || 0,
+    total_spent: spent[c.id] || 0,
+    pct_of_limit: Math.round(((spent[c.id] || 0) / c.declared_spending_limit) * 100),
   }))
 
   const flagSummary = (flags || []).map(f => ({
-    candidate:   f.candidates?.full_name,
-    type:        f.flag_type,
-    severity:    f.severity,
-    status:      f.resolution_status,
-    notes:       f.notes,
+    candidate: f.candidates?.full_name,
+    type: f.flag_type,
+    severity: f.severity,
+    status: f.resolution_status,
+    notes: f.notes,
   }))
 
   const contribSummary = (contributions || []).map(c => ({
-    candidate:  c.candidates?.full_name,
-    donor:      c.donor_name,
-    type:       c.donor_type,
-    amount:     c.amount_kes,
-    date:       c.contribution_date,
-    flagged:    c.flag_status !== 'clean',
+    candidate: c.candidates?.full_name,
+    donor: c.donor_name,
+    type: c.donor_type,
+    amount: c.amount_kes,
+    date: c.contribution_date,
+    flagged: c.flag_status !== 'clean',
   }))
 
   return JSON.stringify({ candidates: candSummary, contributions: contribSummary, flags: flagSummary }, null, 2)
 }
 
 export default function AskPage() {
-  const [messages,  setMessages]  = useState([])
-  const [input,     setInput]     = useState('')
-  const [loading,   setLoading]   = useState(false)
-  const [dbData,    setDbData]    = useState(null)
+  const [messages, setMessages] = useState([])
+  const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [dbData, setDbData] = useState(null)
   const inputRef = useRef()
   const bottomRef = useRef()
 
@@ -117,9 +117,9 @@ export default function AskPage() {
         body: JSON.stringify({
           model: 'claude-sonnet-4-20250514',
           max_tokens: 1000,
-          system: `You are CampaignWatch AI, a public transparency assistant for Kenya's 2027 General Election campaign finance monitoring platform, built by Transparency International Kenya.
+          system: `You are The Samaritan AI, a public transparency assistant for Kenya's 2027 General Election campaign finance monitoring platform, built by Transparency International Kenya.
 
-You have access to real-time data from the CampaignWatch Kenya database. Here is the current data:
+You have access to real-time data from The Samaritan Kenya database. Here is the current data:
 
 ${context}
 
@@ -157,7 +157,7 @@ Do not make up information not present in the data.`,
         <h1>Ask About Campaign Finance</h1>
         <p className="text-gray-500 text-sm mt-1">
           Ask anything about the 2027 Kenya election campaign finances in plain English.
-          Powered by Claude AI and live CampaignWatch data.
+          Powered by Claude AI and live The Samaritan data.
         </p>
       </div>
 
@@ -171,9 +171,9 @@ Do not make up information not present in the data.`,
           {messages.length === 0 && (
             <div className="text-center py-6">
               <div className="text-5xl mb-3">🤖</div>
-              <h3 className="text-navy mb-1">CampaignWatch AI</h3>
+              <h3 className="text-navy mb-1">The Samaritan AI</h3>
               <p className="text-gray-400 text-sm mb-6">
-                Ask me anything about Kenya 2027 campaign finances.<br/>
+                Ask me anything about Kenya 2027 campaign finances.<br />
                 I have access to all candidates, donations, spending, and flags.
               </p>
 
@@ -217,7 +217,7 @@ Do not make up information not present in the data.`,
               </div>
               <div className="bg-ash rounded-2xl rounded-tl-sm px-4 py-3">
                 <div className="flex gap-1">
-                  {[0,1,2].map(i => (
+                  {[0, 1, 2].map(i => (
                     <div key={i} className="w-2 h-2 bg-navy/40 rounded-full animate-bounce"
                       style={{ animationDelay: `${i * 0.15}s` }} />
                   ))}
@@ -269,7 +269,7 @@ Do not make up information not present in the data.`,
 
       {/* Disclaimer */}
       <div className="card bg-ash border-ash-dark text-sm text-gray-500">
-        <strong className="text-navy">ℹ️ About this tool:</strong> CampaignWatch AI answers questions using data
+        <strong className="text-navy">ℹ️ About this tool:</strong> The Samaritan AI answers questions using data
         declared to the IEBC. It can only report what has been officially filed — it cannot verify undeclared
         activities. For suspected violations, please{' '}
         <a href="/tip-off" className="text-gold hover:underline">submit a confidential tip</a>.

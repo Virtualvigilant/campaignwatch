@@ -66,7 +66,7 @@ export default function AdminLayout({ children }) {
             <aside className="w-64 bg-navy flex flex-col sticky top-0 h-screen">
                 {/* Logo */}
                 <div className="px-6 py-5 border-b border-navy-light">
-                    <p className="text-gold font-bold text-base leading-tight">CampaignWatch Kenya</p>
+                    <p className="text-gold font-bold text-base leading-tight">The Samaritan Kenya</p>
                     <p className="text-gray-400 text-xs mt-0.5">Admin Panel</p>
                 </div>
 

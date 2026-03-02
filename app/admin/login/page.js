@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
 
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <p className="text-gold font-bold text-2xl">CampaignWatch Kenya 🇰🇪</p>
+                    <p className="text-gold font-bold text-2xl">The Samaritan Kenya 🇰🇪</p>
                     <p className="text-gray-400 text-sm mt-1">Admin Panel — Restricted Access</p>
                 </div>
 

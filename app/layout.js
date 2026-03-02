@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'CampaignWatch Kenya 🇰🇪',
+  title: 'The Samaritan 🇰🇪',
   description: 'Transparent political finance monitoring ahead of Kenya 2027 Elections — Transparency International Kenya / KISP',
 }
 
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.className} bg-ash min-h-screen`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
           {children}
         </main>
         <footer className="bg-navy text-white text-center py-4 text-sm mt-16">

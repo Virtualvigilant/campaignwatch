@@ -8,11 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy:  { DEFAULT: '#1B2A4A', light: '#2D4A7A', dark: '#0F1A2E' },
-        gold:  { DEFAULT: '#F5A623', light: '#FDC96A', dark: '#C97D0A' },
-        alert: { DEFAULT: '#E63946', light: '#FF6B76', dark: '#B02030' },
-        safe:  { DEFAULT: '#2DC653', light: '#5DE07D', dark: '#1A8A37' },
-        ash:   { DEFAULT: '#F4F6F9', dark: '#E0E4EA' },
+        navy: { DEFAULT: '#1e293b', light: '#334155', dark: '#0f172a' },
+        gold: { DEFAULT: '#b45309', light: '#d97706', dark: '#92400e' },
+        alert: { DEFAULT: '#be123c', light: '#e11d48', dark: '#9f1239' },
+        safe: { DEFAULT: '#047857', light: '#059669', dark: '#065f46' },
+        ash: { DEFAULT: '#f8fafc', dark: '#e2e8f0' },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

@@ -51,15 +51,15 @@ export default async function DashboardPage() {
       .limit(5),
   ])
 
-  
+
 
   // Stats
   const totalContributions = (contributions || []).reduce((s, c) => s + c.amount_kes, 0)
   const flaggedCount = (contributions || []).filter(c => c.flag_status !== 'clean').length
-                     + (expenditures || []).filter(e => e.flag_status !== 'clean').length
+    + (expenditures || []).filter(e => e.flag_status !== 'clean').length
   const spendingByCategory = groupByCategory(expenditures || [])
-  const trendData          = buildTrend(contributions || [])
-  
+  const trendData = buildTrend(contributions || [])
+
   // Top 10 donors
   const topDonors = [...(contributions || [])]
     .sort((a, b) => b.amount_kes - a.amount_kes)
@@ -71,7 +71,7 @@ export default async function DashboardPage() {
       {/* Page header */}
       <div>
         <p className="section-title">Live Dashboard</p>
-        <h1>Kenya 2027 Campaign Finance Monitor</h1>
+        <h1>The Samaritan: Kenya 2027 Monitor</h1>
         <p className="text-gray-500 mt-1 text-sm">
           Real-time tracking of declared political funding &amp; expenditure ahead of the August 2027 General Election.
           Data sourced from IEBC official filings.
@@ -80,37 +80,37 @@ export default async function DashboardPage() {
       <AlertTicker />
 
       {/* ── STAT CARDS ─────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <StatCard icon="🏛️" color="navy"
           value={(candidates || []).length}
-          label="Candidates Tracked"
-          sub="Across all 47 counties" />
+          label="Tracked"
+          sub="47 counties" />
         <StatCard icon="💰" color="gold"
-          value={formatKES(totalContributions)}
-          label="Total Declared Contributions"
-          sub="As of latest IEBC filing" />
+          value={formatKES(totalContributions).replace('KES ', '')}
+          label="Total"
+          sub="Declared" />
         <StatCard icon="🚩" color="alert"
           value={flaggedCount}
-          label="Flagged Transactions"
-          sub="Requiring public scrutiny" />
+          label="Flags"
+          sub="Transactions" />
         <StatCard icon="⚖️" color="safe"
           value={(parties || []).length}
-          label="Parties Monitored"
-          sub="Registered with IEBC" />
+          label="Parties"
+          sub="Monitoring" />
       </div>
 
-      
+
 
       {/* ── CHARTS ROW ─────────────────────────────────────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="card">
-          <p className="section-title">Spending by Category</p>
-          <h2 className="mb-4">Campaign Expenditure Breakdown</h2>
+          <p className="section-title">Spending</p>
+          <h2 className="mb-4 text-lg">Expenditure Breakdown</h2>
           <SpendingChart data={spendingByCategory} />
         </div>
         <div className="card">
-          <p className="section-title">Monthly Trend</p>
-          <h2 className="mb-4">Contribution Inflows Over Time</h2>
+          <p className="section-title">Trend</p>
+          <h2 className="mb-4 text-lg">Inflows Over Time</h2>
           <TrendChart data={trendData} />
         </div>
       </div>
@@ -119,11 +119,11 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Top Donors Table */}
-        <div className="card lg:col-span-2">
+        <div className="card lg:col-span-2 overflow-hidden">
           <p className="section-title">Largest Donations</p>
-          <h2 className="mb-4">Top Declared Contributions</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <h2 className="mb-4 text-lg">Top Contributions</h2>
+          <div className="overflow-x-auto -mx-6 px-6">
+            <table className="w-full text-sm min-w-[500px]">
               <thead>
                 <tr>
                   {['Donor', 'Type', 'Amount (KES)', 'Status'].map(h => (

@@ -4,24 +4,24 @@
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  --color-navy: #1B2A4A;
-  --color-navy-light: #2D4A7A;
-  --color-navy-dark: #0F1A2E;
+  --color-navy: #1e293b;
+  --color-navy-light: #334155;
+  --color-navy-dark: #0f172a;
 
-  --color-gold: #F5A623;
-  --color-gold-light: #FDC96A;
-  --color-gold-dark: #C97D0A;
+  --color-gold: #b45309;
+  --color-gold-light: #d97706;
+  --color-gold-dark: #92400e;
 
-  --color-alert: #E63946;
-  --color-alert-light: #FF6B76;
-  --color-alert-dark: #B02030;
+  --color-alert: #be123c;
+  --color-alert-light: #e11d48;
+  --color-alert-dark: #9f1239;
 
-  --color-safe: #2DC653;
-  --color-safe-light: #5DE07D;
-  --color-safe-dark: #1A8A37;
+  --color-safe: #047857;
+  --color-safe-light: #059669;
+  --color-safe-dark: #065f46;
 
-  --color-ash: #F4F6F9;
-  --color-ash-dark: #E0E4EA;
+  --color-ash: #f8fafc;
+  --color-ash-dark: #e2e8f0;
 }
 
 @layer base {
@@ -46,29 +46,29 @@
 
   /* Cards */
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-ash-dark p-6;
+    @apply bg-white rounded-xl shadow-sm border border-slate-200 p-6;
   }
 
   /* Buttons */
   .btn-primary {
-    @apply bg-gold text-white font-semibold px-4 py-2 rounded-lg hover:bg-gold-dark transition-colors duration-200;
+    @apply bg-gold text-white font-semibold px-4 py-2 rounded-lg hover:bg-gold-dark transition-all duration-200 shadow-sm hover:shadow-md;
   }
 
   .btn-outline {
-    @apply border border-navy text-navy font-semibold px-4 py-2 rounded-lg hover:bg-navy hover:text-white transition-colors duration-200;
+    @apply border border-navy text-navy font-semibold px-4 py-2 rounded-lg hover:bg-navy hover:text-white transition-all duration-200;
   }
 
   /* Table shared styles */
   .table-header {
-    @apply bg-navy text-white text-xs font-semibold uppercase tracking-wider px-4 py-3 text-left;
+    @apply bg-slate-100 text-navy text-xs font-bold uppercase tracking-wider px-4 py-3 text-left border-b border-slate-200;
   }
 
   .table-cell {
-    @apply px-4 py-3 text-sm text-gray-700 border-b border-ash-dark;
+    @apply px-4 py-3 text-sm text-slate-600 border-b border-slate-100;
   }
 
   /* Section heading */
   .section-title {
-    @apply text-sm font-bold uppercase tracking-widest text-gold mb-4;
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-gold mb-4;
   }
 }

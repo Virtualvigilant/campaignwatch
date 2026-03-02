@@ -23,7 +23,7 @@ function ReportCard({ icon, title, description, onDownload, loading }) {
 function toCSV(rows) {
   if (!rows || !rows.length) return ''
   const headers = Object.keys(rows[0]).join(',')
-  const body    = rows.map(r =>
+  const body = rows.map(r =>
     Object.values(r).map(v =>
       typeof v === 'string' ? `"${v.replace(/"/g, '""')}"` : v
     ).join(',')
@@ -33,8 +33,8 @@ function toCSV(rows) {
 
 function downloadCSV(csv, filename) {
   const blob = new Blob([csv], { type: 'text/csv' })
-  const url  = URL.createObjectURL(blob)
-  const a    = document.createElement('a')
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
   a.href = url; a.download = filename; a.click()
   URL.revokeObjectURL(url)
 }
@@ -58,10 +58,10 @@ export default function ReportsPage() {
         supabase.from('flags_and_alerts').select('id'),
       ])
       setSummary({
-        candidates:    (candidates  || []).length,
+        candidates: (candidates || []).length,
         contributions: (contributions || []).reduce((s, c) => s + c.amount_kes, 0),
-        expenditures:  (expenditures  || []).reduce((s, e) => s + e.amount_kes, 0),
-        flags:         (flags || []).length,
+        expenditures: (expenditures || []).reduce((s, e) => s + e.amount_kes, 0),
+        flags: (flags || []).length,
       })
     }
     load()
@@ -92,10 +92,10 @@ export default function ReportsPage() {
       {summary && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
-            { label: 'Candidates',            value: summary.candidates                },
-            { label: 'Total Raised',           value: formatKES(summary.contributions)  },
-            { label: 'Total Spent',            value: formatKES(summary.expenditures)   },
-            { label: 'Flags in Database',      value: summary.flags                    },
+            { label: 'Candidates', value: summary.candidates },
+            { label: 'Total Raised', value: formatKES(summary.contributions) },
+            { label: 'Total Spent', value: formatKES(summary.expenditures) },
+            { label: 'Flags in Database', value: summary.flags },
           ].map(s => (
             <div key={s.label} className="card text-center">
               <p className="text-xl font-bold text-navy">{s.value}</p>
@@ -118,7 +118,7 @@ export default function ReportsPage() {
             'candidates',
             'candidates',
             'full_name, election_type, county, constituency, declared_spending_limit, registration_date',
-            `CampaignWatch_Candidates_${new Date().toISOString().slice(0,10)}.csv`
+            `TheSamaritan_Candidates_${new Date().toISOString().slice(0, 10)}.csv`
           )} />
 
         <ReportCard
@@ -130,7 +130,7 @@ export default function ReportsPage() {
             'contributions',
             'contributions',
             'candidate_id, donor_name, donor_type, amount_kes, contribution_date, source_document, flag_status',
-            `CampaignWatch_Contributions_${new Date().toISOString().slice(0,10)}.csv`
+            `TheSamaritan_Contributions_${new Date().toISOString().slice(0, 10)}.csv`
           )} />
 
         <ReportCard
@@ -142,7 +142,7 @@ export default function ReportsPage() {
             'expenditures',
             'expenditures',
             'candidate_id, category, vendor_name, amount_kes, expenditure_date, description, flag_status',
-            `CampaignWatch_Expenditures_${new Date().toISOString().slice(0,10)}.csv`
+            `TheSamaritan_Expenditures_${new Date().toISOString().slice(0, 10)}.csv`
           )} />
 
         <ReportCard
@@ -154,7 +154,7 @@ export default function ReportsPage() {
             'flags',
             'flags_and_alerts',
             'candidate_id, flag_type, severity, flagged_date, reviewed_by_admin, resolution_status, notes',
-            `CampaignWatch_Flags_${new Date().toISOString().slice(0,10)}.csv`
+            `TheSamaritan_Flags_${new Date().toISOString().slice(0, 10)}.csv`
           )} />
       </div>
 
