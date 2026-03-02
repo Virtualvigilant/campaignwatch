@@ -27,7 +27,7 @@ export default function Navbar() {
 
                     <Link href="/" className="flex items-center gap-2">
                         <span className="text-gold font-bold text-lg leading-tight">
-                            The Samaritan<br />
+                             The Samaritan<br />
                             <span className="text-white text-xs font-normal">Protecting Democracy Through Transparency</span>
                         </span>
                     </Link>
